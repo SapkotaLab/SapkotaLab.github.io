@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const contactEmail = 'yadav.sapkota@stjude.org'
+---
+
+<BaseLayout title="Join Us | SapkotaLab" description="How to contact the SapkotaLab." active="join-us">
+  <section class="hero">
+    <p class="eyebrow">Join Us</p>
+    <h1>Interested in survivorship research?</h1>
+    <p>
+      The lab welcomes collaboration and inquiries from trainees and researchers interested in
+      childhood cancer survivorship, prediction models, multi-omics, and functional genomics.
+    </p>
+    <div class="actions">
+      <a class="button" href={`mailto:${contactEmail}`}>Email the lab</a>
+      <a class="button secondary" href="/members/">See contact details</a>
+    </div>
+  </section>
+
+  <section class="card prose">
+    <h2>What the lab works on</h2>
+    <ul>
+      <li>Long-term toxicities of cancer treatment</li>
+      <li>Clinical and genetic risk prediction</li>
+      <li>Multi-omics and system genetics</li>
+      <li>Functional genomics in hiPSC models</li>
+      <li>Health disparities in survivorship</li>
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const publications = (await getCollection('publications')).slice().sort((a, b) => b.data.year - a.data.year)
+---
+
+<BaseLayout title="Publications | SapkotaLab" description="Selected publications from the SapkotaLab." active="publications">
+  <section class="hero">
+    <p class="eyebrow">Publications</p>
+    <h1>Selected papers</h1>
+    <p>A short list of representative publications pulled from the St. Jude clinical research profile.</p>
+  </section>
+
+  <section class="list">
+    {publications.map((publication) => (
+      <article class="list-item">
+        <h2>{publication.data.title}</h2>
+        <p class="meta">{publication.data.citation}</p>
+        <p class="sources">
+          Sources:{' '}
+          {publication.data.sourceUrls.map((url, index) => (
+            <>
+              {index > 0 ? ', ' : null}
+              <a href={url} target="_blank" rel="noreferrer">{url}</a>
+            </>
+          ))}
+        </p>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

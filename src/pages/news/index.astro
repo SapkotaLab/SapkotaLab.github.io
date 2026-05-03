@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const news = (await getCollection('news')).slice().sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+---
+
+<BaseLayout title="News | SapkotaLab" description="Recent news related to the SapkotaLab." active="news">
+  <section class="hero">
+    <p class="eyebrow">News</p>
+    <h1>Recent updates</h1>
+    <p>St. Jude stories and releases that track the lab's research progress.</p>
+  </section>
+
+  <section class="list">
+    {news.map((item) => (
+      <article class="list-item">
+        <h2>{item.data.title}</h2>
+        <p class="meta">{item.data.date.toISOString().slice(0, 10)}</p>
+        <p>{item.data.summary}</p>
+        <p class="sources">
+          Sources:{' '}
+          {item.data.sourceUrls.map((url, index) => (
+            <>
+              {index > 0 ? ', ' : null}
+              <a href={url} target="_blank" rel="noreferrer">{url}</a>
+            </>
+          ))}
+        </p>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

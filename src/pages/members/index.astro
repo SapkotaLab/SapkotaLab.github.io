@@ -1,0 +1,64 @@
+---
+import { getEntry, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const person = await getEntry('people', 'yadav-sapkota')
+const { Content } = await render(person)
+---
+
+<BaseLayout title="Members | SapkotaLab" description="Lab member and PI information." active="members">
+  <section class="hero">
+    <p class="eyebrow">Members</p>
+    <h1>{person.data.name}</h1>
+    <p>{person.data.role} | {person.data.department}</p>
+  </section>
+
+  <section class="grid" style="align-items: start;">
+    <article class="card prose">
+      <p>{person.data.summary}</p>
+      <p class="meta">
+        {person.data.institution} | {person.data.location} | <a href={`mailto:${person.data.email}`}>{person.data.email}</a>
+      </p>
+      <Content />
+      <p class="meta">Phone: {person.data.phone} | Fax: {person.data.fax}</p>
+      <p class="sources">
+        Sources:{' '}
+        {person.data.sourceUrls.map((url, index) => (
+          <>
+            {index > 0 ? ', ' : null}
+            <a href={url} target="_blank" rel="noreferrer">{url}</a>
+          </>
+        ))}
+      </p>
+    </article>
+
+    <article class="card prose">
+      <h2>Education</h2>
+      <ul>
+        {person.data.education.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>Affiliations</h2>
+      <ul>
+        {person.data.affiliations.map((item) => <li>{item}</li>)}
+      </ul>
+    </article>
+
+    <article class="card prose">
+      <h2>Research Interests</h2>
+      <ul>
+        {person.data.researchInterests.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>Mailing Address</h2>
+      <p>
+        {person.data.mailingAddress.map((line, index) => (
+          <>
+            {index > 0 ? <br /> : null}
+            {line}
+          </>
+        ))}
+      </p>
+    </article>
+  </section>
+</BaseLayout>

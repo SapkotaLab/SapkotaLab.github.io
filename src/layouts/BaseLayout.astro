@@ -1,0 +1,236 @@
+---
+const {
+  title = 'SapkotaLab',
+  description = "SapkotaLab at St. Jude Children's Research Hospital.",
+  active = 'home',
+} = Astro.props
+
+const navItems = [
+  { href: '/research/', label: 'Research', key: 'research' },
+  { href: '/members/', label: 'Members', key: 'members' },
+  { href: '/publications/', label: 'Publications', key: 'publications' },
+  { href: '/news/', label: 'News', key: 'news' },
+  { href: '/join-us/', label: 'Join Us', key: 'join-us' },
+]
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        line-height: 1.5;
+        font-weight: 400;
+        background: #f6f7fb;
+        color: #17212f;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        background: #f6f7fb;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .shell {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 1.25rem;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #dce3eb;
+      }
+
+      .brand {
+        font-size: 1.05rem;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: 0.01em;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.5rem;
+      }
+
+      nav a {
+        padding: 0.4rem 0.75rem;
+        border-radius: 999px;
+        text-decoration: none;
+        color: #4b5563;
+      }
+
+      nav a[aria-current='page'] {
+        background: #17212f;
+        color: #fff;
+      }
+
+      main {
+        padding: 2rem 0 3rem;
+      }
+
+      .stack {
+        display: grid;
+        gap: 1rem;
+      }
+
+      section + section {
+        margin-top: 2rem;
+      }
+
+      .eyebrow {
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-size: 0.78rem;
+        color: #6b7280;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.12;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .hero {
+        display: grid;
+        gap: 1rem;
+        max-width: 68ch;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1rem;
+        border-radius: 0.8rem;
+        border: 1px solid #17212f;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .button.secondary {
+        border-color: #cfd6df;
+      }
+
+      .grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid #dce3eb;
+        border-radius: 1rem;
+        padding: 1rem;
+      }
+
+      .card h2,
+      .card h3 {
+        font-size: 1.05rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .meta {
+        color: #6b7280;
+        font-size: 0.95rem;
+      }
+
+      .prose {
+        max-width: 70ch;
+      }
+
+      .prose > * + * {
+        margin-top: 0.8rem;
+      }
+
+      .prose ul {
+        padding-left: 1.15rem;
+        margin: 0;
+      }
+
+      .prose li + li {
+        margin-top: 0.3rem;
+      }
+
+      .list {
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .list-item {
+        background: #fff;
+        border: 1px solid #dce3eb;
+        border-radius: 1rem;
+        padding: 1rem;
+      }
+
+      .sources {
+        font-size: 0.9rem;
+        color: #6b7280;
+        word-break: break-word;
+      }
+
+      .sources a {
+        color: #6b7280;
+      }
+
+      footer {
+        padding: 1rem 0 0.5rem;
+        color: #6b7280;
+        font-size: 0.92rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <a class="brand" href="/">SapkotaLab</a>
+        <nav aria-label="Primary">
+          {navItems.map((item) => (
+            <a href={item.href} aria-current={active === item.key ? 'page' : undefined}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer>St. Jude Children's Research Hospital</footer>
+    </div>
+  </body>
+</html>

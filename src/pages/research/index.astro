@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const research = await Promise.all(
+  (await getCollection('research'))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(async (entry) => {
+      const { Content } = await render(entry)
+      return { ...entry, Content }
+    }),
+)
+---
+
+<BaseLayout title="Research | SapkotaLab" description="Research themes in the SapkotaLab." active="research">
+  <section class="hero">
+    <p class="eyebrow">Research</p>
+    <h1>Main themes</h1>
+    <p>These themes reflect the lab's current focus on survivor outcomes, prediction, and mechanism.</p>
+  </section>
+
+  <section class="list">
+    {research.map((item) => (
+      <article class="list-item prose">
+        <h2>{item.data.title}</h2>
+        <p class="meta">{item.data.summary}</p>
+        <item.Content />
+        <p class="sources">
+          Sources:{' '}
+          {item.data.sourceUrls.map((url, index) => (
+            <>
+              {index > 0 ? ', ' : null}
+              <a href={url} target="_blank" rel="noreferrer">{url}</a>
+            </>
+          ))}
+        </p>
+      </article>
+    ))}
+  </section>
+</BaseLayout>
