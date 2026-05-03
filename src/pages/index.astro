@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
+import ResearchGraphic from '../components/ResearchGraphic.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 
 const people = await getCollection('people')
@@ -16,45 +17,74 @@ const news = (await getCollection('news'))
 ---
 
 <BaseLayout title="SapkotaLab" description="Clinical and genomic survivorship research at St. Jude." active="home">
-  <section class="hero">
-    <p class="eyebrow">St. Jude Children's Research Hospital</p>
-    <h1>Research on the long-term effects of childhood cancer treatment.</h1>
-    <p>{person.data.summary}</p>
-    <div class="actions">
-      <a class="button" href="/research/">Explore research</a>
-      <a class="button secondary" href="/members/">Meet the lab</a>
+  <section class="hero home-hero">
+    <div class="hero-copy">
+      <p class="eyebrow">St. Jude Children's Research Hospital</p>
+      <h1>Research on the long-term effects of childhood cancer treatment.</h1>
+      <p>{person.data.summary}</p>
+      <div class="actions">
+        <a class="button" href="/research/">Explore research</a>
+        <a class="button secondary" href="/members/">Meet the lab</a>
+      </div>
+      <div class="chip-row" aria-label="Lab overview">
+        <span class="chip">{research.length} research themes</span>
+        <span class="chip">{publications.length} selected publications</span>
+        <span class="chip">{news.length} recent updates</span>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <ResearchGraphic decorative={true} showCaption={false} />
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <p class="eyebrow">Current focus</p>
+      <h2>Research themes</h2>
+    </div>
+    <div class="grid">
+      {research.map((item) => (
+        <article class="card">
+          <h3>{item.data.title}</h3>
+          <p>{item.data.summary}</p>
+        </article>
+      ))}
     </div>
   </section>
 
   <section class="grid">
-    {research.map((item) => (
-      <article class="card">
-        <h2>{item.data.title}</h2>
-        <p>{item.data.summary}</p>
-      </article>
-    ))}
-  </section>
-
-  <section class="grid">
     <article class="card">
-      <h2>Selected publications</h2>
+      <div class="section-heading">
+        <p class="eyebrow">Selected work</p>
+        <h2>Selected publications</h2>
+      </div>
       <div class="stack">
         {publications.map((publication) => (
-          <div>
-            <h3>{publication.data.title}</h3>
-            <p class="meta">{publication.data.citation}</p>
+          <div class="publication-row">
+            <span class="publication-year">{publication.data.year}</span>
+            <div>
+              <h3>{publication.data.title}</h3>
+              <p class="meta">{publication.data.citation}</p>
+            </div>
           </div>
         ))}
       </div>
     </article>
 
     <article class="card">
-      <h2>Recent news</h2>
+      <div class="section-heading">
+        <p class="eyebrow">Recent updates</p>
+        <h2>News</h2>
+      </div>
       <div class="stack">
         {news.map((item) => (
-          <div>
-            <h3>{item.data.title}</h3>
-            <p class="meta">{item.data.date.toISOString().slice(0, 10)}</p>
+          <div class="publication-row">
+            <span class="publication-year">{item.data.date.toISOString().slice(0, 10)}</span>
+            <div>
+              <h3>{item.data.title}</h3>
+              <p class="meta">{item.data.summary}</p>
+            </div>
           </div>
         ))}
       </div>

@@ -6,7 +6,7 @@ const news = (await getCollection('news')).slice().sort((a, b) => b.data.date.ge
 ---
 
 <BaseLayout title="News | SapkotaLab" description="Recent news related to the SapkotaLab." active="news">
-  <section class="hero">
+  <section class="hero page-heading">
     <p class="eyebrow">News</p>
     <h1>Recent updates</h1>
     <p>St. Jude stories and releases that track the lab's research progress.</p>
@@ -15,8 +15,11 @@ const news = (await getCollection('news')).slice().sort((a, b) => b.data.date.ge
   <section class="list">
     {news.map((item) => (
       <article class="list-item">
-        <h2>{item.data.title}</h2>
-        <p class="meta">{item.data.date.toISOString().slice(0, 10)}</p>
+        <div class="section-heading">
+          <p class="eyebrow">Update</p>
+          <h2>{item.data.title}</h2>
+        </div>
+        <p class="publication-year">{item.data.date.toISOString().slice(0, 10)}</p>
         <p>{item.data.summary}</p>
         <p class="sources">
           Sources:{' '}

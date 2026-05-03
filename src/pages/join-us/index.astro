@@ -5,7 +5,8 @@ const contactEmail = 'yadav.sapkota@stjude.org'
 ---
 
 <BaseLayout title="Join Us | SapkotaLab" description="How to contact the SapkotaLab." active="join-us">
-  <section class="hero">
+  <section class="hero join-grid">
+    <div class="hero-copy">
     <p class="eyebrow">Join Us</p>
     <h1>Interested in survivorship research?</h1>
     <p>
@@ -16,16 +17,20 @@ const contactEmail = 'yadav.sapkota@stjude.org'
       <a class="button" href={`mailto:${contactEmail}`}>Email the lab</a>
       <a class="button secondary" href="/members/">See contact details</a>
     </div>
-  </section>
+    </div>
 
-  <section class="card prose">
-    <h2>What the lab works on</h2>
-    <ul>
-      <li>Long-term toxicities of cancer treatment</li>
-      <li>Clinical and genetic risk prediction</li>
-      <li>Multi-omics and system genetics</li>
-      <li>Functional genomics in hiPSC models</li>
-      <li>Health disparities in survivorship</li>
-    </ul>
+    <aside class="card prose join-panel">
+      <div class="section-heading">
+        <p class="eyebrow">Research areas</p>
+        <h2>What the lab works on</h2>
+      </div>
+      <ul>
+        <li>Long-term toxicities of cancer treatment</li>
+        <li>Clinical and genetic risk prediction</li>
+        <li>Multi-omics and system genetics</li>
+        <li>Functional genomics in hiPSC models</li>
+        <li>Health disparities in survivorship</li>
+      </ul>
+    </aside>
   </section>
 </BaseLayout>

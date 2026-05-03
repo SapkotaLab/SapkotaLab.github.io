@@ -7,14 +7,14 @@ const { Content } = await render(person)
 ---
 
 <BaseLayout title="Members | SapkotaLab" description="Lab member and PI information." active="members">
-  <section class="hero">
+  <section class="hero page-heading">
     <p class="eyebrow">Members</p>
     <h1>{person.data.name}</h1>
-    <p>{person.data.role} | {person.data.department}</p>
+    <p class="meta">{person.data.role} | {person.data.department}</p>
   </section>
 
-  <section class="grid" style="align-items: start;">
-    <article class="card prose">
+  <section class="grid member-grid" style="align-items: start;">
+    <article class="card prose member-main">
       <p>{person.data.summary}</p>
       <p class="meta">
         {person.data.institution} | {person.data.location} | <a href={`mailto:${person.data.email}`}>{person.data.email}</a>
@@ -32,7 +32,7 @@ const { Content } = await render(person)
       </p>
     </article>
 
-    <article class="card prose">
+    <article class="card prose member-side">
       <h2>Education</h2>
       <ul>
         {person.data.education.map((item) => <li>{item}</li>)}
@@ -44,7 +44,7 @@ const { Content } = await render(person)
       </ul>
     </article>
 
-    <article class="card prose">
+    <article class="card prose member-side">
       <h2>Research Interests</h2>
       <ul>
         {person.data.researchInterests.map((item) => <li>{item}</li>)}

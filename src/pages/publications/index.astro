@@ -6,7 +6,7 @@ const publications = (await getCollection('publications')).slice().sort((a, b) =
 ---
 
 <BaseLayout title="Publications | SapkotaLab" description="Selected publications from the SapkotaLab." active="publications">
-  <section class="hero">
+  <section class="hero page-heading">
     <p class="eyebrow">Publications</p>
     <h1>Selected papers</h1>
     <p>A short list of representative publications pulled from the St. Jude clinical research profile.</p>
@@ -15,7 +15,11 @@ const publications = (await getCollection('publications')).slice().sort((a, b) =
   <section class="list">
     {publications.map((publication) => (
       <article class="list-item">
-        <h2>{publication.data.title}</h2>
+        <div class="section-heading">
+          <p class="eyebrow">Publication</p>
+          <h2>{publication.data.title}</h2>
+        </div>
+        <p class="publication-year">{publication.data.year}</p>
         <p class="meta">{publication.data.citation}</p>
         <p class="sources">
           Sources:{' '}
