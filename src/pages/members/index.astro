@@ -7,21 +7,23 @@ const { Content } = await render(person)
 ---
 
 <BaseLayout title="Members | SapkotaLab" description="Lab member and PI information." active="members">
-  <section class="hero page-heading">
-    <p class="eyebrow">Members</p>
+
+  <section class="page-heading">
+    <div class="page-label">Members</div>
     <h1>{person.data.name}</h1>
-    <p class="meta">{person.data.role} | {person.data.department}</p>
+    <p class="page-subtitle">{person.data.role} &mdash; {person.data.department}</p>
   </section>
 
-  <section class="grid member-grid" style="align-items: start;">
-    <article class="card prose member-main">
+  <section class="profile-layout">
+    <article class="profile-main prose">
       <p>{person.data.summary}</p>
-      <p class="meta">
-        {person.data.institution} | {person.data.location} | <a href={`mailto:${person.data.email}`}>{person.data.email}</a>
+      <p class="profile-meta">
+        {person.data.institution} &nbsp;|&nbsp; {person.data.location} &nbsp;|&nbsp;
+        <a href={`mailto:${person.data.email}`} style="color: var(--accent);">{person.data.email}</a>
       </p>
       <Content />
-      <p class="meta">Phone: {person.data.phone} | Fax: {person.data.fax}</p>
-      <p class="sources">
+      <p class="profile-meta">Phone: {person.data.phone} &nbsp;|&nbsp; Fax: {person.data.fax}</p>
+      <div class="sources-row">
         Sources:{' '}
         {person.data.sourceUrls.map((url, index) => (
           <>
@@ -29,36 +31,49 @@ const { Content } = await render(person)
             <a href={url} target="_blank" rel="noreferrer">{url}</a>
           </>
         ))}
-      </p>
+      </div>
     </article>
 
-    <article class="card prose member-side">
-      <h2>Education</h2>
-      <ul>
-        {person.data.education.map((item) => <li>{item}</li>)}
-      </ul>
+    <aside class="profile-side">
+      <div class="card">
+        <h2>Education</h2>
+        <ul style="display: grid; gap: 0.4rem;">
+          {person.data.education.map((item) => (
+            <li style="font-size: 0.875rem; color: var(--muted);">{item}</li>
+          ))}
+        </ul>
+      </div>
 
-      <h2>Affiliations</h2>
-      <ul>
-        {person.data.affiliations.map((item) => <li>{item}</li>)}
-      </ul>
-    </article>
+      <div class="card">
+        <h2>Affiliations</h2>
+        <ul style="display: grid; gap: 0.4rem;">
+          {person.data.affiliations.map((item) => (
+            <li style="font-size: 0.875rem; color: var(--muted);">{item}</li>
+          ))}
+        </ul>
+      </div>
 
-    <article class="card prose member-side">
-      <h2>Research Interests</h2>
-      <ul>
-        {person.data.researchInterests.map((item) => <li>{item}</li>)}
-      </ul>
+      <div class="card">
+        <h2>Research Interests</h2>
+        <ul style="display: grid; gap: 0.4rem;">
+          {person.data.researchInterests.map((item) => (
+            <li style="font-size: 0.875rem; color: var(--muted);">{item}</li>
+          ))}
+        </ul>
+      </div>
 
-      <h2>Mailing Address</h2>
-      <p>
-        {person.data.mailingAddress.map((line, index) => (
-          <>
-            {index > 0 ? <br /> : null}
-            {line}
-          </>
-        ))}
-      </p>
-    </article>
+      <div class="card">
+        <h2>Mailing Address</h2>
+        <p style="font-size: 0.875rem; color: var(--muted); line-height: 1.7;">
+          {person.data.mailingAddress.map((line, index) => (
+            <>
+              {index > 0 ? <br /> : null}
+              {line}
+            </>
+          ))}
+        </p>
+      </div>
+    </aside>
   </section>
+
 </BaseLayout>

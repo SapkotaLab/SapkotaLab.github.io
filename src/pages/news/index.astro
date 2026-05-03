@@ -6,31 +6,29 @@ const news = (await getCollection('news')).slice().sort((a, b) => b.data.date.ge
 ---
 
 <BaseLayout title="News | SapkotaLab" description="Recent news related to the SapkotaLab." active="news">
-  <section class="hero page-heading">
-    <p class="eyebrow">News</p>
-    <h1>Recent updates</h1>
-    <p>St. Jude stories and releases that track the lab's research progress.</p>
+
+  <section class="page-heading">
+    <div class="page-label">News</div>
+    <h1>Recent Updates</h1>
+    <p class="page-subtitle">St. Jude stories and releases that track the lab's research progress.</p>
   </section>
 
-  <section class="list">
+  <section class="full-list">
     {news.map((item) => (
       <article class="list-item">
-        <div class="section-heading">
-          <p class="eyebrow">Update</p>
-          <h2>{item.data.title}</h2>
-        </div>
-        <p class="publication-year">{item.data.date.toISOString().slice(0, 10)}</p>
-        <p>{item.data.summary}</p>
-        <p class="sources">
-          Sources:{' '}
+        <div class="item-label">{item.data.date.toISOString().slice(0, 10)}</div>
+        <h2 class="item-title">{item.data.title}</h2>
+        <p class="item-summary">{item.data.summary}</p>
+        <div class="sources-row">
           {item.data.sourceUrls.map((url, index) => (
             <>
-              {index > 0 ? ', ' : null}
-              <a href={url} target="_blank" rel="noreferrer">{url}</a>
+              {index > 0 ? ' · ' : null}
+              <a href={url} target="_blank" rel="noreferrer">Source {index + 1}</a>
             </>
           ))}
-        </p>
+        </div>
       </article>
     ))}
   </section>
+
 </BaseLayout>

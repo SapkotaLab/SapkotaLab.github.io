@@ -5,32 +5,45 @@ const contactEmail = 'yadav.sapkota@stjude.org'
 ---
 
 <BaseLayout title="Join Us | SapkotaLab" description="How to contact the SapkotaLab." active="join-us">
-  <section class="hero join-grid">
-    <div class="hero-copy">
-    <p class="eyebrow">Join Us</p>
-    <h1>Interested in survivorship research?</h1>
-    <p>
+
+  <section class="page-heading">
+    <div class="page-label">Join Us</div>
+    <h1>Interested in Survivorship Research?</h1>
+    <p class="page-subtitle">
       The lab welcomes collaboration and inquiries from trainees and researchers interested in
       childhood cancer survivorship, prediction models, multi-omics, and functional genomics.
     </p>
-    <div class="actions">
-      <a class="button" href={`mailto:${contactEmail}`}>Email the lab</a>
-      <a class="button secondary" href="/members/">See contact details</a>
+    <div class="actions" style="margin-top: 1.5rem;">
+      <a class="btn btn-primary" href={`mailto:${contactEmail}`}>Email the Lab</a>
+      <a class="btn btn-secondary" href="/members/">Contact Details</a>
     </div>
-    </div>
+  </section>
 
-    <aside class="card prose join-panel">
-      <div class="section-heading">
-        <p class="eyebrow">Research areas</p>
-        <h2>What the lab works on</h2>
-      </div>
-      <ul>
+  <section class="join-layout">
+    <div>
+      <div class="section-label">Research Areas</div>
+      <h2 class="section-title">What the Lab Works On</h2>
+      <ul class="arrow-list">
         <li>Long-term toxicities of cancer treatment</li>
         <li>Clinical and genetic risk prediction</li>
         <li>Multi-omics and system genetics</li>
         <li>Functional genomics in hiPSC models</li>
         <li>Health disparities in survivorship</li>
       </ul>
-    </aside>
+    </div>
+
+    <div class="card">
+      <h2>Contact</h2>
+      <p style="font-size: 0.875rem; color: var(--muted); margin-bottom: 0.75rem;">
+        Reach out directly via email to discuss research opportunities, collaborations, or lab inquiries.
+      </p>
+      <a
+        href={`mailto:${contactEmail}`}
+        style="display: block; font-size: 0.875rem; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; word-break: break-all;"
+      >
+        {contactEmail}
+      </a>
+    </div>
   </section>
+
 </BaseLayout>

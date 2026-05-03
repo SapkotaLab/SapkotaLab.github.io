@@ -6,31 +6,29 @@ const publications = (await getCollection('publications')).slice().sort((a, b) =
 ---
 
 <BaseLayout title="Publications | SapkotaLab" description="Selected publications from the SapkotaLab." active="publications">
-  <section class="hero page-heading">
-    <p class="eyebrow">Publications</p>
-    <h1>Selected papers</h1>
-    <p>A short list of representative publications pulled from the St. Jude clinical research profile.</p>
+
+  <section class="page-heading">
+    <div class="page-label">Publications</div>
+    <h1>Selected Papers</h1>
+    <p class="page-subtitle">A short list of representative publications pulled from the St. Jude clinical research profile.</p>
   </section>
 
-  <section class="list">
-    {publications.map((publication) => (
+  <section class="full-list">
+    {publications.map((pub) => (
       <article class="list-item">
-        <div class="section-heading">
-          <p class="eyebrow">Publication</p>
-          <h2>{publication.data.title}</h2>
-        </div>
-        <p class="publication-year">{publication.data.year}</p>
-        <p class="meta">{publication.data.citation}</p>
-        <p class="sources">
-          Sources:{' '}
-          {publication.data.sourceUrls.map((url, index) => (
+        <div class="item-label">{pub.data.year}</div>
+        <h2 class="item-title">{pub.data.title}</h2>
+        <p class="item-summary">{pub.data.citation}</p>
+        <div class="sources-row">
+          {pub.data.sourceUrls.map((url, index) => (
             <>
-              {index > 0 ? ', ' : null}
-              <a href={url} target="_blank" rel="noreferrer">{url}</a>
+              {index > 0 ? ' · ' : null}
+              <a href={url} target="_blank" rel="noreferrer">Link {index + 1}</a>
             </>
           ))}
-        </p>
+        </div>
       </article>
     ))}
   </section>
+
 </BaseLayout>

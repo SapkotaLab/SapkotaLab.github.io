@@ -13,22 +13,21 @@ const research = await Promise.all(
 ---
 
 <BaseLayout title="Research | SapkotaLab" description="Research themes in the SapkotaLab." active="research">
-  <section class="hero page-heading">
-    <p class="eyebrow">Research</p>
-    <h1>Main themes</h1>
-    <p>These themes reflect the lab's current focus on survivor outcomes, prediction, and mechanism.</p>
+
+  <section class="page-heading">
+    <div class="page-label">Research</div>
+    <h1>Research Themes</h1>
+    <p class="page-subtitle">These themes reflect the lab's current focus on survivor outcomes, prediction, and mechanism.</p>
   </section>
 
-  <section class="list">
-    {research.map((item) => (
+  <section class="full-list">
+    {research.map((item, i) => (
       <article class="list-item prose">
-        <div class="section-heading">
-          <p class="eyebrow">Theme</p>
-          <h2>{item.data.title}</h2>
-        </div>
-        <p class="meta">{item.data.summary}</p>
+        <div class="item-label">Theme {i + 1}</div>
+        <h2 class="item-title">{item.data.title}</h2>
+        <p class="item-summary">{item.data.summary}</p>
         <item.Content />
-        <p class="sources">
+        <div class="sources-row">
           Sources:{' '}
           {item.data.sourceUrls.map((url, index) => (
             <>
@@ -36,8 +35,9 @@ const research = await Promise.all(
               <a href={url} target="_blank" rel="noreferrer">{url}</a>
             </>
           ))}
-        </p>
+        </div>
       </article>
     ))}
   </section>
+
 </BaseLayout>

@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content'
-import ResearchGraphic from '../components/ResearchGraphic.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 
 const people = await getCollection('people')
@@ -17,35 +16,23 @@ const news = (await getCollection('news'))
 ---
 
 <BaseLayout title="SapkotaLab" description="Clinical and genomic survivorship research at St. Jude." active="home">
-  <section class="hero home-hero">
-    <div class="hero-copy">
-      <p class="eyebrow">St. Jude Children's Research Hospital</p>
-      <h1>Research on the long-term effects of childhood cancer treatment.</h1>
-      <p>{person.data.summary}</p>
-      <div class="actions">
-        <a class="button" href="/research/">Explore research</a>
-        <a class="button secondary" href="/members/">Meet the lab</a>
-      </div>
-      <div class="chip-row" aria-label="Lab overview">
-        <span class="chip">{research.length} research themes</span>
-        <span class="chip">{publications.length} selected publications</span>
-        <span class="chip">{news.length} recent updates</span>
-      </div>
-    </div>
 
-    <div class="hero-art">
-      <ResearchGraphic decorative={true} showCaption={false} />
+  <section class="hero">
+    <div class="hero-lab">St. Jude Children&rsquo;s Research Hospital</div>
+    <h1>Research on long-term effects of childhood cancer treatment</h1>
+    <p>{person.data.summary}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/research/">Explore Research</a>
+      <a class="btn btn-secondary" href="/members/">Meet the Lab</a>
     </div>
   </section>
 
   <section>
-    <div class="section-heading">
-      <p class="eyebrow">Current focus</p>
-      <h2>Research themes</h2>
-    </div>
-    <div class="grid">
+    <div class="section-label">Current Focus</div>
+    <h2 class="section-title">Research Themes</h2>
+    <div class="research-grid">
       {research.map((item) => (
-        <article class="card">
+        <article class="research-card">
           <h3>{item.data.title}</h3>
           <p>{item.data.summary}</p>
         </article>
@@ -53,41 +40,40 @@ const news = (await getCollection('news'))
     </div>
   </section>
 
-  <section class="grid">
-    <article class="card">
-      <div class="section-heading">
-        <p class="eyebrow">Selected work</p>
-        <h2>Selected publications</h2>
-      </div>
-      <div class="stack">
-        {publications.map((publication) => (
-          <div class="publication-row">
-            <span class="publication-year">{publication.data.year}</span>
-            <div>
-              <h3>{publication.data.title}</h3>
-              <p class="meta">{publication.data.citation}</p>
-            </div>
-          </div>
+  <section class="two-col">
+    <div class="col-block">
+      <div class="section-label">Selected Work</div>
+      <h2 class="section-title" style="font-size: 1.2rem; margin-bottom: 1.25rem;">Publications</h2>
+      <div class="pub-list">
+        {publications.map((pub) => (
+          <article class="pub-item">
+            <span class="pub-year">{pub.data.year}</span>
+            <p class="pub-title">{pub.data.title}</p>
+            <p class="pub-citation">{pub.data.citation}</p>
+          </article>
         ))}
       </div>
-    </article>
+      <a href="/publications/" class="btn btn-secondary" style="margin-top: 1.25rem; font-size: 0.85rem;">
+        All publications →
+      </a>
+    </div>
 
-    <article class="card">
-      <div class="section-heading">
-        <p class="eyebrow">Recent updates</p>
-        <h2>News</h2>
-      </div>
-      <div class="stack">
+    <div class="col-block">
+      <div class="section-label">Recent Updates</div>
+      <h2 class="section-title" style="font-size: 1.2rem; margin-bottom: 1.25rem;">News</h2>
+      <div class="pub-list">
         {news.map((item) => (
-          <div class="publication-row">
-            <span class="publication-year">{item.data.date.toISOString().slice(0, 10)}</span>
-            <div>
-              <h3>{item.data.title}</h3>
-              <p class="meta">{item.data.summary}</p>
-            </div>
-          </div>
+          <article class="pub-item">
+            <span class="pub-year">{item.data.date.toISOString().slice(0, 10)}</span>
+            <p class="pub-title">{item.data.title}</p>
+            <p class="pub-citation">{item.data.summary}</p>
+          </article>
         ))}
       </div>
-    </article>
+      <a href="/news/" class="btn btn-secondary" style="margin-top: 1.25rem; font-size: 0.85rem;">
+        All updates →
+      </a>
+    </div>
   </section>
+
 </BaseLayout>
